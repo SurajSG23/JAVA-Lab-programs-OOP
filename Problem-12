@@ -1,0 +1,99 @@
+/*Develop an application which consists of Stack class and include methods to
+push and pop the stack elements. Create your own defined Exception class and
+handle exceptions while stacks run with “Stack as full” and “Stack under
+flow” while calling push() and pop() methods respectively. Implement this
+using „throws‟ and „throw‟ keywords.*/
+
+import java.util.Scanner;
+
+class StackException extends Exception {
+    StackException(String str) {
+        super(str);
+    }
+}
+
+class stack {
+    private final int[] stk;
+    private int tos;
+
+    stack(int size) {
+        stk = new int[size];
+        tos = -1;
+    }
+
+    void push(int item) throws StackException {
+        if (tos == stk.length - 1)
+            throw new StackException("Stack Overflow!!");
+        else
+            stk[++tos] = item;
+    }
+
+    void pop() throws StackException {
+        if (tos < 0)
+            throw new StackException("Stack Underflow!!");
+        else
+            System.out.println("Popped element: " + stk[tos--]);
+    }
+
+    void peek() {
+        if (tos < 0)
+            System.out.println("Stack underflow!!");
+        else
+            System.out.println("Top most element: " + stk[tos]);
+    }
+
+    void display() {
+        if (tos < 0)
+            System.out.println("Stack underflow!!");
+        else {
+            System.out.println("Elements of stack : ");
+            for (int i = tos; i >= 0; i--) {
+                System.out.println(stk[i]);
+            }
+        }
+    }
+}
+
+public class Prog12 {
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the size of the stack: ");
+        int size = in.nextInt();
+        stack stk = new stack(size);
+        int ch;
+        do {
+            System.out.println("Menu:\n1.Push\n2.Pop\n3.peek\n4.Display\n5.Exit");
+            System.out.print("Enter your choice: ");
+            ch = in.nextInt();
+            switch (ch) {
+                case 1:
+                    try {
+                        System.out.print("Enter the element to be pushed: ");
+                        stk.push(in.nextInt());
+                    }catch (StackException e){
+                        System.err.println("Exception caught: "+e);
+                    }
+                    break;
+                case 2:
+                    try {
+                        stk.pop();
+                    }catch (StackException e){
+                        System.err.println("Exception caught: "+e);
+                    }
+                    break;
+                case 3:
+                    stk.peek();
+                    break;
+                case 4:
+                    stk.display();
+                    break;
+                case 5:
+                    System.out.println("Thank you!!");
+                    break;
+                default:
+                    System.out.println("Invalid choice!!!");
+            }
+        }while (ch!=5);
+
+    }
+}
