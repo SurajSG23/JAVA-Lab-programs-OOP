@@ -1,0 +1,63 @@
+/* Given that an EMPLOYEE class contains the following members:
+Members: Employee ID, Employee Name, Department name &amp; Basic Pay */
+
+import java.util.Scanner;
+
+class Employee {
+    Scanner in = new Scanner(System.in);
+    int id;
+    String name, dept_name;
+    double basic_pay, gross_pay, net_pay, income_tax, da, hra;
+
+    void read() {
+        System.out.print("Enter employee's name: ");
+        name = in.next();
+        System.out.print("Enter employee's ID: ");
+        id = in.nextInt();
+        System.out.print("Enter employee's department name: ");
+        dept_name = in.next();
+        System.out.print("Enter employee's Basic pay: ");
+        basic_pay = in.nextDouble();
+    }
+
+    void gross() {
+        da = 0.58 * basic_pay;
+        hra = 0.16 * basic_pay;
+        gross_pay = basic_pay + da + hra;
+    }
+
+    void net() {
+        if (gross_pay <= 200000)
+            income_tax = 0;
+        else if (gross_pay <= 300000)
+            income_tax = 0.1 * gross_pay;
+        else if (gross_pay <= 500000)
+            income_tax = 0.15 * gross_pay;
+        else
+            income_tax = (0.30 * gross_pay) + (0.02 * gross_pay);
+        net_pay = gross_pay - income_tax;
+    }
+
+    void display() {
+        System.out.println("Name: " + name + "\nID: " + id + "\nDepartment name: " + dept_name + "\nBasic pay: " + basic_pay + "\nGross pay: " + gross_pay + "\nNet pay: " + net_pay);
+    }
+
+}
+
+public class Prog9 {
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the number of emplyee: ");
+        int n = in.nextInt();
+        Employee[] emp = new Employee[n];
+        for (int i = 0; i < n; i++) {
+            emp[i] = new Employee();
+            System.out.println("Enter the details of employee number " + (i + 1));
+            emp[i].read();
+            emp[i].gross();
+            emp[i].net();
+        }
+        for (int i = 0; i < n; i++)
+            emp[i].display();;
+    }
+}
