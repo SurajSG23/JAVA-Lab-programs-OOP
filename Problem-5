@@ -1,0 +1,43 @@
+/* Given are two one dimensional array A and B which are sorted in
+ascending
+order. Develop an application to merge them into a single sorted
+array C that
+contains every item form A and B, in ascending order.*/
+
+import java.util.Scanner;
+
+public class Prog1 {
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        int[] A = new int[10];
+        System.out.println("Enter the number of elements in Array A: ");
+        int n1 = in.nextInt();
+        System.out.print("Enter the elements in Array A in ascending order : ");
+        for (int i = 0; i < n1; i++)
+            A[i] = in.nextInt();
+        int[] B = new int[10];
+        System.out.println("Enter the number of elements in Array B: ");
+        int n2 = in.nextInt();
+        System.out.print("Enter the elements in Array B in ascending order: ");
+        for (int i = 0; i < n2; i++)
+            B[i] = in.nextInt();
+        int[] C = new int[n1 + n2];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while (i < n1 && j < n2) {
+            if (A[i] < B[j])
+                C[k++] = A[i++];
+            else
+                C[k++] = B[j++];
+        }
+        while (i < n1)
+            C[k++] = A[i++];
+        while (j < n2)
+            C[k++] = B[j++];
+        System.out.println("Array after merging : ");
+        for (i = 0; i < n1 + n2; i++) {
+            System.out.print(C[i] + " ");
+        }
+    }
+}
