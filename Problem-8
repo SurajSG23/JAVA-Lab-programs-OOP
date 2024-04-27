@@ -1,0 +1,66 @@
+/*Write a program to read a list containing Book Title, Book Code, Cost and Quantity
+interactively for min. of 10 books and produce a five column output as shown below.
+NAME CODE UNIT PRICE QUANTITY TOTAL PRICE
+Define the suitable functions and perform the transactions*/
+
+import java.awt.*;
+import java.util.Scanner;
+
+class BOOK {
+    Scanner in = new Scanner(System.in);
+    String title;
+    int code, cost;
+
+    void read() {
+        System.out.println("Enter the title of the book: ");
+        title = in.next();
+        System.out.println("Enter the price of this book: ");
+        cost = in.nextInt();
+        System.out.println("Enter the book code: ");
+        code = in.nextInt();
+    }
+
+    void display(int qt) {
+        int price = qt* cost;
+        System.out.printf("Title: %s\nCost: %d\nCode: %d\nQuantity: %d\nPrice: %d\n", title, cost, code, qt, price);
+
+    }
+}
+
+public class Prob8 {
+    public static void main(String args[]) {
+        int ch, code, quantity;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the number of books: ");
+        int n = in.nextInt();
+        BOOK[] b = new BOOK[n];
+        for (int i = 0; i < n; i++) {
+            b[i] = new BOOK();
+            System.out.println("Enter the details of book number " + (i + 1));
+            b[i].read();
+        }
+        do {
+            System.out.println("1:Buy a book\n2:Exit\nEnter your choice: ");
+            ch = in.nextInt();
+            if (ch == 1) {
+                int flag=0;
+                System.out.println("Enter the book code : ");
+                code = in.nextInt();
+                System.out.println("Enter the quantity of book: ");
+                quantity = in.nextInt();
+                for (int i = 0; i < n; i++) {
+                    if (code == b[i].code) {
+                        b[i].display(quantity);
+                        flag=1;
+                        break;
+                    }
+                }
+                if (flag==0)
+                     System.out.println("Invalid code!!");
+            } else if (ch == 2)
+                System.out.println("Thank you!!");
+            else
+                System.out.println("Invalid choice!!");
+        } while (ch != 2);
+    }
+}
