@@ -1,0 +1,39 @@
+/*Create a class of objects CUBE. Develop an application to read the side for three cubes
+and print the Volume and outer area. */
+
+import java.util.Scanner;
+
+class CUBE {
+    Scanner sc = new Scanner(System.in);
+    int out_ar;
+    int vol;
+
+    void read(int n) {
+        System.out.print("Enter the length of the cube " + n + " : ");
+        int a = sc.nextInt();
+        out_ar = a * a * a;
+        vol = 6 * a * a;
+
+    }
+
+    void display(int n) {
+        System.out.println("Area of cube " + n + " : " + out_ar + "\nVolume of cube " + n + " : " + vol+"\n");
+
+    }
+}
+
+
+public class Prob6 {
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        CUBE[] cube = new CUBE[3];
+        for (int i = 0; i < 3; i++) {
+            cube[i] = new CUBE();
+            cube[i].read(i + 1);
+
+        }
+        for (int i = 0; i < 3; i++) {
+            cube[i].display(i + 1);
+        }
+    }
+}
