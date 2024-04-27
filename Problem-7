@@ -1,0 +1,76 @@
+/*The annual examination results of 20 students*/
+
+import java.util.Scanner;
+
+class RESULT {
+    Scanner in = new Scanner(System.in);
+    int s1, s2, s3, total, highest;
+
+    void read() {
+        System.out.print("Subject1 marks: ");
+        s1 = in.nextInt();
+        System.out.print("Subject2 marks: ");
+        s2 = in.nextInt();
+        System.out.print("Subject3 marks: ");
+        s3 = in.nextInt();
+        total = s1 + s2 + s3;
+        highest = (s1 > s2) ? ((s1 > s3) ? s1 : s3) : ((s2 > s3) ? s2 : s3);
+    }
+
+    void display() {
+        System.out.println("Subject1\tSubject2\tSubject3\tTotal");
+        System.out.println(s1 + "\t\t\t" + s2 + "\t\t\t" + s3 + "\t\t\t" + total);
+    }
+}
+
+public class Prob7 {
+    public static void main(String args[]) {
+        int roll_number = 0;
+        RESULT[] rn = new RESULT[20];
+        for (int i = 0; i <20 ; i++) {
+            rn[i] = new RESULT();
+            System.out.println("Enter the details of student with roll number " + (i + 1));
+            rn[i].read();
+        }
+        System.out.println("Result of each student: ");
+        for (int i = 0; i < 20; i++){
+            System.out.println("Total marks of student with roll number "+(i+1));
+            rn[i].display();
+        }
+
+
+        int highest;
+        highest = rn[1].s1;
+        for (int i = 0; i < 20; i++) {
+            if (rn[i].s1 >= highest) {
+                highest = rn[i].s1;
+                roll_number = (i + 1);
+            }
+        }
+        System.out.println("Highest marks in subject 1 is " + highest + " scored by roll number: " + roll_number);
+        highest = rn[1].s2;
+        for (int i = 0; i < 20; i++) {
+            if (rn[i].s2 >= highest) {
+                highest = rn[i].s2;
+                roll_number = (i + 1);
+            }
+        }
+        System.out.println("Highest marks in subject 2 is " + highest + " scored by roll number: " + roll_number);
+        highest = rn[1].s3;
+        for (int i = 0; i < 20; i++) {
+            if (rn[i].s3 >= highest) {
+                highest = rn[i].s3;
+                roll_number = (i + 1);
+            }
+        }
+        System.out.println("Highest marks in subject 3 is " + highest + " scored by roll number: " + roll_number);
+        highest = rn[1].total;
+        for (int i = 0; i < 20; i++) {
+            if (rn[i].total>= highest) {
+                highest = rn[i].total;
+                roll_number = (i + 1);
+            }
+        }
+        System.out.println("Highest total marks is " + highest + " scored by roll number: " + roll_number);
+    }
+}
