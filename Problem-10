@@ -1,0 +1,79 @@
+/*Develop an application with an abstract Bank class */
+
+import javax.xml.namespace.QName;
+import java.util.Scanner;
+
+abstract class Bank3 {
+    Scanner in = new Scanner(System.in);
+    char bank_type;
+    String name;
+    boolean platinumCard;
+
+    abstract void getRoi();
+
+    double termDeposit, interest;
+    int term;
+
+    void deposit() {
+        bank_type = 'n';
+        platinumCard = false;
+        termDeposit = 0.0;
+        interest = 0.0;
+        term = 0;
+    }
+}
+
+class BankDetails extends Bank3 {
+    void getRoi() {
+        if (bank_type == 'i') {
+            platinumCard = true;
+            if (term >= 3)
+                interest = 0.8 * termDeposit;
+        } else {
+            if (term >= 3)
+                interest = 0.07 * termDeposit;
+        }
+    }
+
+    @Override
+    void deposit() {
+        System.out.println("Enter the type of bank('n'-National & 'i'-International): ");
+        bank_type = in.next().charAt(0);
+        if (bank_type == 'n' || bank_type == 'i') {
+            System.out.println("Enter the name of the depositor: ");
+            name = in.next();
+            System.out.println("Enter the amount to be deposited in the bank: ");
+            termDeposit = in.nextDouble();
+            System.out.println("Enter the term for which amount has been deposited (in years): ");
+            term = in.nextInt();
+            getRoi();
+        } else System.out.println("Invalid bank type!!");
+    }
+
+    void display() {
+        System.out.println("Name: " + name);
+        if (bank_type == 'n')
+            System.out.println("Bank type: National");
+        else System.out.println("Bank type: International");
+        System.out.println("Term deposit: " + termDeposit);
+        System.out.println("Total years: " + term);
+        System.out.println("Interest: " + interest);
+    }
+}
+
+public class Prog10 {
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the number of depositor: ");
+        int n=in.nextInt();
+        BankDetails[] dep = new BankDetails[n];
+        for (int i =0 ;i<n;i++){
+            dep[i]=new BankDetails();
+            System.out.println("Enter the details of depositor number "+(i+1));
+            dep[i].deposit();
+        }
+        for (int i =0 ;i<n;i++){
+            dep[i].display();
+        }
+    }
+}
